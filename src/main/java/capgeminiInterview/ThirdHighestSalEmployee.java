@@ -37,6 +37,11 @@ public class ThirdHighestSalEmployee {
         
       Map<String, Long> countEmpByDept= employees.stream().collect(Collectors.groupingBy(Employee::getDepartent,Collectors.counting()));
       countEmpByDept.forEach((dept,count)-> System.out.println("Department: "+dept+ " and Count: "+count));
+     // use tree map
+      Map<String, List<Employee>> groupedByLength = employees.stream()
+    		    .collect(Collectors.groupingBy(Employee::getDepartent, TreeMap::new, Collectors.toList()));
+
+    		System.out.println(groupedByLength);
 	}
 }
 
