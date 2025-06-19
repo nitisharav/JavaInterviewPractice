@@ -1,0 +1,105 @@
+Great, Nitish! 💪 Let's **practice Java 8 `Optional`** — a powerful way to **avoid `NullPointerException`** and write **cleaner code**.
+
+---
+
+## ✅ 1. **Basic Creation and Usage**
+
+```java
+Optional<String> name = Optional.of("Nitish");
+System.out.println(name.get()); // prints "Nitish"
+```
+
+### ❗ Safe Way:
+
+```java
+name.ifPresent(n -> System.out.println("Hello " + n)); // avoids null
+```
+
+---
+
+## ⚠️ Avoid `null` Safely
+
+```java
+String str = null;
+Optional<String> optionalStr = Optional.ofNullable(str);
+
+// ❌ Don't do optionalStr.get() directly
+System.out.println(optionalStr.orElse("Default")); // Output: "Default"
+```
+
+---
+
+## ✅ 2. **Common Methods to Practice**
+
+| Method          | Purpose                               | Example                                           |
+| --------------- | ------------------------------------- | ------------------------------------------------- |
+| `of()`          | Create non-null Optional              | `Optional.of("Hi")`                               |
+| `ofNullable()`  | Create Optional even with null        | `Optional.ofNullable(name)`                       |
+| `isPresent()`   | Check if value exists                 | `if(opt.isPresent())`                             |
+| `ifPresent()`   | Run code if value exists              | `opt.ifPresent(System.out::println)`              |
+| `orElse()`      | Default value if empty                | `opt.orElse("default")`                           |
+| `orElseGet()`   | Default value via supplier            | `opt.orElseGet(() -> "gen")`                      |
+| `orElseThrow()` | Throw custom exception if empty       | `opt.orElseThrow(() -> new Exception("Missing"))` |
+| `map()`         | Transform value inside Optional       | `opt.map(String::toUpperCase)`                    |
+| `flatMap()`     | Like map, but avoids nested Optionals | Useful for chaining Optionals                     |
+| `filter()`      | Filter value based on condition       | `opt.filter(s -> s.length() > 3)`                 |
+
+---
+
+## 🧪 3. **Practice Questions**
+
+### ✅ a. Convert name to uppercase if not null
+
+```java
+Optional<String> name = Optional.of("nitish");
+String upper = name.map(String::toUpperCase).orElse("UNKNOWN");
+System.out.println(upper); // Output: NITISH
+```
+
+---
+
+### ✅ b. Handle null user object safely
+
+```java
+public class User {
+    private String name;
+    public User(String name) { this.name = name; }
+    public String getName() { return name; }
+}
+
+// Main code
+User user = null;
+Optional<User> userOpt = Optional.ofNullable(user);
+String username = userOpt.map(User::getName).orElse("Guest");
+System.out.println(username); // Output: Guest
+```
+
+---
+
+### ✅ c. Filter Optional by condition
+
+```java
+Optional<String> email = Optional.of("nitish@example.com");
+
+email
+    .filter(e -> e.endsWith("@gmail.com"))
+    .ifPresentOrElse(
+        e -> System.out.println("Valid Gmail"),
+        () -> System.out.println("Not Gmail")
+    );
+```
+
+---
+
+## 🧠 Tip for Interviews:
+
+> 💡 **Never use `Optional.get()` without checking presence.**
+> Always prefer `.orElse()`, `.map()`, or `.ifPresent()` to handle values safely.
+
+---
+
+Let me know if you want:
+
+* A full **Optional practice assignment**
+* **Real-world examples** with APIs or repositories
+* Practice on `Optional<List<T>>` or nested Optionals (`Optional<User>` → `Optional<Address>`) 🔥
