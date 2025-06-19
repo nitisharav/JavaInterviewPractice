@@ -1,0 +1,99 @@
+Great question, Nitish! Let's break down **CORS (Cross-Origin Resource Sharing)** — a common topic in frontend-backend communication, especially in Angular.
+
+---
+
+## 🌍 What is CORS?
+
+**CORS (Cross-Origin Resource Sharing)** is a **security feature** implemented by browsers to **restrict cross-origin HTTP requests**.
+
+### 🔒 It prevents:
+
+> JavaScript running in one origin (domain) from accessing resources (APIs) in another origin **unless explicitly allowed.**
+
+---
+
+## 🧠 Example of CORS in Action:
+
+Let’s say your Angular app runs on:
+
+```
+http://localhost:4200
+```
+
+And it tries to call a backend API on:
+
+```
+http://localhost:8080/api/users
+```
+
+🛑 By default, the browser **blocks this request** due to CORS — because they are **different origins (different ports)**.
+
+---
+
+## ✅ How to Fix CORS?
+
+You must **configure the backend** (not frontend) to **allow requests from your Angular origin**.
+
+---
+
+### 🔧 Spring Boot Example:
+
+```java
+@CrossOrigin(origins = "http://localhost:4200")
+@RestController
+public class UserController {
+
+    @GetMapping("/api/users")
+    public List<User> getUsers() {
+        // return users
+    }
+}
+```
+
+Or globally in Spring Boot:
+
+```java
+@Configuration
+public class WebConfig implements WebMvcConfigurer {
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/api/**")
+                .allowedOrigins("http://localhost:4200")
+                .allowedMethods("GET", "POST", "PUT", "DELETE")
+                .allowedHeaders("*");
+    }
+}
+```
+
+---
+
+### 🧪 Testing: If CORS is not enabled, you'll see:
+
+```
+Access to XMLHttpRequest at 'http://localhost:8080/api/users'
+from origin 'http://localhost:4200' has been blocked by CORS policy.
+```
+
+---
+
+## 🔧 Node.js Express Example:
+
+```js
+const cors = require('cors');
+app.use(cors({ origin: 'http://localhost:4200' }));
+```
+
+---
+
+## 📌 Summary:
+
+| Topic                   | Details                                                                   |
+| ----------------------- | ------------------------------------------------------------------------- |
+| What is CORS?           | Browser security feature to block unauthorized cross-origin requests      |
+| Who controls it?        | The **backend** must enable it                                            |
+| Angular needs CORS when | Angular frontend runs on different origin than backend                    |
+| Solution                | Use `@CrossOrigin` (Spring), `cors` (Node), or configure headers manually |
+
+---
+
+Let me know if you're using **Spring**, **Node**, or another backend, and I’ll give you exact config. Want a diagram showing the CORS flow? 🔁

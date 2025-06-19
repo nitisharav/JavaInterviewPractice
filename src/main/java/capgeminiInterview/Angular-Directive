@@ -1,0 +1,79 @@
+🔷 What are Directives in Angular?
+Directives are classes in Angular that allow you to manipulate the DOM or change the appearance/behavior of elements.
+
+They are one of the core building blocks of Angular — alongside components, services, and modules.
+
+🔧 Types of Directives:
+Angular has three main types of directives:
+
+✅ 1. Component Directives (Custom UI)
+These are actually components.
+
+Every Angular component is a directive with a template.
+
+@Component({
+  selector: 'app-user',
+  templateUrl: './user.component.html'
+})
+export class UserComponent { }
+✔️ Has template
+✔️ Controls UI
+✔️ Used via <app-user></app-user>
+
+✅ 2. Structural Directives (Change DOM structure)
+Add or remove elements from the DOM.
+
+Common examples:
+
+*ngIf – conditionally includes a template
+
+*ngFor – repeats a template for each item
+
+*ngSwitch
+
+
+<div *ngIf="isLoggedIn">Welcome, user!</div>
+
+<ul>
+  <li *ngFor="let item of items">{{ item }}</li>
+</ul>
+✔️ Begins with *
+✔️ Manipulates the DOM layout
+
+✅ 3. Attribute Directives (Change element appearance/behavior)
+Modify the look or behavior of an element.
+
+Built-in examples:
+
+ngClass – add/remove classes dynamically
+
+ngStyle – apply styles dynamically
+
+required, disabled, etc.
+
+
+<button [ngClass]="{ 'active': isActive }">Click</button>
+<p [ngStyle]="{ 'color': isError ? 'red' : 'green' }">Status</p>
+✅ No *
+✅ Just adds or modifies attributes or styles
+
+🎯 Custom Attribute Directive Example:
+You can create your own directive using @Directive:
+
+
+@Directive({
+  selector: '[appHighlight]'
+})
+export class HighlightDirective {
+  constructor(private el: ElementRef) {
+    el.nativeElement.style.backgroundColor = 'yellow';
+  }
+}
+Used as:
+
+<p appHighlight>This will have yellow background</p>
+📌 Summary Table:
+Directive Type	Purpose	Example
+Component	Custom UI with template	<app-user>
+Structural	Add/remove DOM elements	*ngIf, *ngFor
+Attribute	Change look/behavior of existing elements	ngClass, ngStyle, custom directives

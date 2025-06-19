@@ -1,0 +1,74 @@
+🌱 What is a Bean in Spring?
+In Spring, a bean is just an object that is:
+
+Managed by the Spring Container
+
+Created, initialized, and injected automatically
+
+🔑 Think of it like this:
+If Spring creates and manages an object — it’s a bean.
+
+🔧 How to Define a Bean?
+✅ 1. Using @Component and @ComponentScan
+
+@Component
+public class UserService {
+    public void serve() {
+        System.out.println("User service called");
+    }
+}
+Then in config:
+
+@Configuration
+@ComponentScan("com.nitish.app")
+public class AppConfig { }
+Spring auto-detects and creates a bean for UserService.
+
+✅ 2. Using @Bean in a Configuration class
+
+@Configuration
+public class AppConfig {
+
+    @Bean
+    public UserService userService() {
+        return new UserService();
+    }
+}
+This also registers UserService as a Spring Bean.
+
+🧠 When is a Bean Created?
+When the ApplicationContext is initialized
+
+Singleton beans are created once per Spring container
+
+Scope can be changed to prototype, request, session, etc.
+
+🎯 What are Beans Used For?
+Services
+
+Repositories
+
+Controllers
+
+Configurations
+
+Utility classes
+
+Anything you want Spring to inject and manage the lifecycle of.
+
+🔍 Real-Life Analogy:
+Imagine you run a restaurant:
+
+You (Spring container) manage chefs (beans).
+
+You decide when to hire them, when to fire, and who does what.
+
+Clients (your app code) just ask for the service — they don’t create chefs manually.
+
+📌 Summary Table:
+Feature	Description
+What is a Bean?	->An object managed by Spring Container
+How to define?->	@Component, @Service, @Bean
+Who manages it?->	Spring IoC Container
+When created?->	On app startup (usually singleton)
+Why needed?	For loose coupling & DI (Dependency Injection)

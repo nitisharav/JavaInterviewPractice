@@ -1,0 +1,117 @@
+Great question, Nitish! 🔥
+Let’s walk through **how an Angular application starts**, step by step — from loading the first file to rendering the first component.
+
+---
+
+## 🧠 Angular Application Startup Flow
+
+When you run:
+
+```bash
+ng serve
+```
+
+Angular compiles the app and starts from the **entry point file**.
+
+---
+
+### ✅ Step-by-Step Startup Flow
+
+### **1. `main.ts` — Entry Point**
+
+```ts
+// main.ts
+platformBrowserDynamic().bootstrapModule(AppModule)
+  .catch(err => console.error(err));
+```
+
+* This file is the first to execute.
+* It **bootstraps the root module** (`AppModule`).
+
+---
+
+### **2. `AppModule` — Root Module**
+
+```ts
+@NgModule({
+  declarations: [AppComponent],
+  imports: [BrowserModule],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
+
+* Declares components (like `AppComponent`)
+* Imports other modules (e.g., routing, HttpClientModule)
+* Tells Angular to **bootstrap AppComponent**
+
+---
+
+### **3. `index.html` — Where Angular Injects the App**
+
+```html
+<body>
+  <app-root></app-root>  <!-- This is the placeholder -->
+</body>
+```
+
+* Angular looks for the `<app-root>` tag
+* This is where `AppComponent` is inserted dynamically
+
+---
+
+### **4. `AppComponent` — Root Component**
+
+```ts
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+})
+export class AppComponent {
+  title = 'my-app';
+}
+```
+
+* This is the first component rendered
+* It can contain child components, routes, etc.
+
+---
+
+### ✅ Visual Flow:
+
+```
+main.ts
+  ↓
+AppModule (bootstrapped)
+  ↓
+AppComponent (selector: <app-root>)
+  ↓
+index.html (injects into <app-root>)
+  ↓
+Your App Starts! 🎉
+```
+
+---
+
+## 📁 Files Involved in Startup:
+
+| File               | Purpose                                    |
+| ------------------ | ------------------------------------------ |
+| `main.ts`          | Entry point, bootstraps Angular            |
+| `app.module.ts`    | Root module, tells Angular what to load    |
+| `index.html`       | Static shell with `<app-root>` placeholder |
+| `app.component.ts` | Root component rendered at startup         |
+
+---
+
+## 🔁 After That...
+
+Angular renders the component tree, sets up routing, injects services, and listens for browser events — fully reactive and SPA-powered!
+
+---
+
+Let me know if you'd like:
+
+* A **diagram of the Angular lifecycle**
+* Deep dive into **change detection**
+* Or how **lazy loading** affects this startup flow 🔥

@@ -1,0 +1,123 @@
+Great question, Nitish! 🔥
+Let’s understand the **Structure of an Angular Application** — how it’s organized, and what each part does.
+
+---
+
+## 🧱 Angular Project Structure (High-Level)
+
+When you generate a project with:
+
+```bash
+ng new my-app
+```
+
+You get a folder structure like this:
+
+```
+my-app/
+│
+├── src/
+│   ├── app/
+│   │   ├── components/
+│   │   ├── services/
+│   │   ├── models/
+│   │   ├── app.module.ts
+│   │   ├── app.component.ts / html / css
+│   │   └── ...
+│   ├── assets/
+│   ├── environments/
+│   ├── index.html
+│   ├── main.ts
+│   └── styles.css
+├── angular.json
+├── package.json
+└── tsconfig.json
+```
+
+---
+
+## 📁 Folder & File Breakdown
+
+### 🔹 `src/app/` — **Main application code**
+
+| File / Folder               | Purpose                                                     |
+| --------------------------- | ----------------------------------------------------------- |
+| `components/`               | Your UI building blocks (like `login`, `user`, `dashboard`) |
+| `services/`                 | Business logic and API communication using `HttpClient`     |
+| `models/`                   | Interfaces or types (e.g., `User.ts`, `Product.ts`)         |
+| `app.module.ts`             | Root module – bootstraps your app                           |
+| `app.component.ts/html/css` | Main component that loads first                             |
+
+---
+
+### 🔹 `src/assets/` — Static files
+
+* Images, JSON files, icons, etc.
+
+### 🔹 `src/environments/` — Environment configs
+
+* `environment.ts` (dev)
+* `environment.prod.ts` (prod)
+
+---
+
+### 🔹 `index.html` — Entry point of your app
+
+* Angular bootstraps the app inside `<app-root></app-root>`
+
+### 🔹 `main.ts` — Starts the Angular app
+
+```ts
+platformBrowserDynamic().bootstrapModule(AppModule)
+```
+
+---
+
+## 🧩 Angular Building Blocks:
+
+| Concept                      | Role                                                       |
+| ---------------------------- | ---------------------------------------------------------- |
+| **Module** (`@NgModule`)     | Groups components, services, etc.                          |
+| **Component** (`@Component`) | UI + Logic for a piece of the app                          |
+| **Service** (`@Injectable`)  | Shared logic, API calls                                    |
+| **Template**                 | HTML with Angular syntax (`*ngIf`, `{{}}`)                 |
+| **Routing**                  | Navigation between components                              |
+| **Pipe**                     | Transform data in template (`date`, `uppercase`, `custom`) |
+| **Directive**                | DOM manipulation or styling (`*ngFor`, custom highlight)   |
+
+---
+
+## 📦 Example Folder Structure for a Scalable Project
+
+```
+app/
+├── core/                → Singleton services (auth, interceptors)
+├── shared/              → Shared modules, pipes, components
+├── features/
+│   ├── dashboard/
+│   │   ├── dashboard.component.ts
+│   │   └── dashboard.module.ts
+│   ├── login/
+│   ├── user/
+├── app.component.ts
+├── app.module.ts
+├── app-routing.module.ts
+```
+
+---
+
+## 📌 Summary
+
+| Part                | Description                                  |
+| ------------------- | -------------------------------------------- |
+| `components/`       | Visual UI pieces                             |
+| `services/`         | Reusable logic (e.g. API, auth)              |
+| `models/`           | Interfaces / data types                      |
+| `app.module.ts`     | Root of your app, tells Angular what to load |
+| `routing.module.ts` | Defines page navigation                      |
+| `assets/`           | Static files                                 |
+| `environments/`     | API base URLs and configs                    |
+
+---
+
+Let me know if you want a **real project folder template** or how to organize **large-scale Angular apps**! 💪

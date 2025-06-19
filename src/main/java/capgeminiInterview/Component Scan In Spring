@@ -1,0 +1,64 @@
+🔍 What is Component Scan in Spring?
+Component Scanning is the process where Spring automatically detects and registers beans (i.e., classes annotated with @Component, @Service, @Repository, or @Controller) into the Spring ApplicationContext.
+
+It saves you from writing manual bean definitions in XML or using @Bean methods for every class.
+
+✅ How it Works:
+When you annotate a class with:
+
+@Component – generic Spring-managed bean
+
+@Service – service layer class
+
+@Repository – DAO layer
+
+@Controller – web controller (Spring MVC)
+
+…and you enable component scan, Spring will detect these and register them as beans.
+
+✅ Example: Using @ComponentScan
+🔹 Java Config Example:
+
+@Configuration
+@ComponentScan(basePackages = "com.nitish.app")
+public class AppConfig {
+}
+📌 This tells Spring:
+
+"Scan the com.nitish.app package and its sub-packages to find classes with annotations like @Component, @Service, etc."
+
+🔹 Class to be scanned:
+
+@Service
+public class UserService {
+    public void serve() {
+        System.out.println("Serving user...");
+    }
+}
+Spring will automatically create and manage a UserService bean.
+
+✅ Without @ComponentScan?
+You'd have to define beans manually:
+
+@Bean
+public UserService userService() {
+    return new UserService();
+}
+✅ Default Behavior:
+If you use @SpringBootApplication, it includes @ComponentScan by default:
+
+
+@SpringBootApplication  // includes @ComponentScan
+public class MyApp {
+    public static void main(String[] args) {
+        SpringApplication.run(MyApp.class, args);
+    }
+}
+It scans the package of this class and all sub-packages.
+
+🔍 Summary:
+Feature	Description
+What it does->	Automatically registers beans
+Annotations it picks->	@Component, @Service, @Repository, @Controller
+Default in Boot->	Yes, in @SpringBootApplication
+Best Practice->	Keep your main class at top package level to cover all

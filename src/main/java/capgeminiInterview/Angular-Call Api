@@ -1,0 +1,123 @@
+Great question, Nitish! 👨‍💻 In Angular, you call an API using the **`HttpClient`** service from the `@angular/common/http` package.
+
+Let me walk you through the full setup step-by-step. 💥
+
+---
+
+## ✅ 1. **Import `HttpClientModule` in App Module**
+
+First, enable HTTP services in your app.
+
+```ts
+// app.module.ts
+import { HttpClientModule } from '@angular/common/http';
+
+@NgModule({
+  declarations: [ /* your components */ ],
+  imports: [
+    BrowserModule,
+    HttpClientModule // ✅ Important!
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
+
+---
+
+## ✅ 2. **Inject `HttpClient` in Your Service**
+
+Create a service to keep your API logic clean.
+
+```ts
+// user.service.ts
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class UserService {
+
+  private apiUrl = 'https://jsonplaceholder.typicode.com/users'; // Sample API
+
+  constructor(private http: HttpClient) { }
+
+  getUsers(): Observable<any> {
+    return this.http.get(this.apiUrl);
+  }
+}
+```
+
+---
+
+## ✅ 3. **Call the API from a Component**
+
+Now use the service in your component to get data.
+
+```ts
+// user.component.ts
+import { Component, OnInit } from '@angular/core';
+import { UserService } from './user.service';
+
+@Component({
+  selector: 'app-user',
+  template: `
+    <h2>User List</h2>
+    <ul>
+      <li *ngFor="let user of users">{{ user.name }}</li>
+    </ul>
+  `
+})
+export class UserComponent implements OnInit {
+
+  users: any[] = [];
+
+  constructor(private userService: UserService) { }
+
+  ngOnInit(): void {
+    this.userService.getUsers().subscribe({
+      next: data => this.users = data,
+      error: err => console.error('Error fetching users', err)
+    });
+  }
+}
+```
+
+---
+
+## ✅ 4. **Summary Flow**
+
+| Step                        | Code                                  |
+| --------------------------- | ------------------------------------- |
+| 1. Import HTTP module       | `HttpClientModule` in `AppModule`     |
+| 2. Create Service           | Use `HttpClient.get()` or `post()`    |
+| 3. Use Service in Component | Call `subscribe()` to handle response |
+
+---
+
+## 🧠 Bonus Tips:
+
+### ➕ Other Methods:
+
+* `http.post(url, body)` – For POST requests
+* `http.put(url, body)` – For PUT requests
+* `http.delete(url)` – For DELETE requests
+
+### 🛡️ Add headers:
+
+```ts
+const headers = { 'Authorization': 'Bearer token' };
+return this.http.get(url, { headers });
+```
+
+---
+
+Let me know if you want to:
+
+* Use **RxJS operators** like `map`, `retry`, `catchError`
+* Handle **loading spinners** or **error messages**
+* Call **secured APIs with tokens**
+
+I can help you structure it like a pro 💪🔥
