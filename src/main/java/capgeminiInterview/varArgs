@@ -1,0 +1,131 @@
+🔷 Variable Arguments (Varargs) in Java
+In Java, Varargs (Variable Arguments) allow you to pass zero or more arguments of the same type to a method.
+
+✅ Introduced in Java 5, it helps avoid method overloading for different argument counts.
+
+🔑 Syntax
+
+returnType methodName(type... variableName)
+📌 Internally, Java treats varargs as an array.
+
+✅ Example
+
+public class VarargsDemo {
+
+    // Method using varargs
+    public static void printNames(String... names) {
+        for (String name : names) {
+            System.out.println(name);
+        }
+    }
+
+    public static void main(String[] args) {
+        printNames("Nitish", "Ravi", "Ankit");
+        printNames();  // valid
+    }
+}
+Output:
+
+
+Edit
+Nitish
+Ravi
+Ankit
+✅ Rules of Varargs
+You can have only one varargs parameter in a method.
+
+It must be the last parameter in the method signature.
+
+You can call the method with zero or more arguments.
+
+It is represented as an array inside the method.
+
+⚠️ Invalid Example (Varargs not last)
+t
+// ❌ Compile-time error
+public void example(int... nums, String name) {}
+✅ Valid Example with Regular Parameter + Varargs
+
+public void greet(String greeting, String... names) {
+    for (String name : names) {
+        System.out.println(greeting + ", " + name);
+    }
+}
+🔍 Varargs vs Overloading
+Instead of writing:
+
+void sum(int a, int b) {}
+void sum(int a, int b, int c) {}
+You can simply write:
+
+
+void sum(int... numbers) {
+    int total = 0;
+    for (int n : numbers) total += n;
+    System.out.println(total);
+}
+🧠 Interview Tip
+Q: What happens internally when you use varargs?
+A: The varargs parameter is treated as an array, so int... numbers is like int[] numbers.
+
+
+
+You said:
+main method , can we use var arg
+
+
+ChatGPT said:
+Yes, you can absolutely use varargs in the main() method in Java! In fact, the standard main method itself uses varargs.
+
+✅ Standard main() Method Signature:
+
+public static void main(String... args)
+This is functionally identical to:
+
+
+public static void main(String[] args)
+Both are valid because String... args is simply Java's varargs syntax for String[] args.
+
+🔍 Why it works:
+String... args is syntactic sugar for String[] args.
+
+Java converts the varargs into an array behind the scenes.
+
+JVM looks for a method named main with either signature.
+
+✅ Example:
+
+public class VarargsMainDemo {
+    public static void main(String... args) {
+        System.out.println("Number of arguments: " + args.length);
+        for (String arg : args) {
+            System.out.println(arg);
+        }
+    }
+}
+Run it like:
+
+
+java VarargsMainDemo Nitish Mumbai Engineer
+Output:
+
+Number of arguments: 3
+Nitish
+Mumbai
+Engineer
+❗ Important Notes:
+The main() method must be:
+
+public static void main(String[] args)
+// or
+public static void main(String... args)
+The method name must be exactly main for the JVM to run it.
+
+It cannot have any other parameter types (e.g., int... args won't work).
+
+🔥 Summary:
+Valid main method?	Signature
+✅ Yes	public static void main(String[] args)
+✅ Yes	public static void main(String... args)
+❌ No	public static void main(int... args)
+❌ No	public static int main(String[] args) (wrong return type)

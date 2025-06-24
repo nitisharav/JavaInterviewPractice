@@ -19,6 +19,8 @@ For thread safety (synchronized)-  Synchronized method ensures thread safety, bu
  * */
 
 //1.making thread safe 
+//✅ Thread-safe
+//❌ Slightly slower due to method-level synchronization
 class LazySingleton1{
 	private static LazySingleton1 instance;
 	private LazySingleton1() {};
