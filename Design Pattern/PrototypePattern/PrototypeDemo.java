@@ -78,7 +78,7 @@ class Document implements Cloneable{
 	//@override
 	public Document clone() {
 		try {
-			return (Document) super.clone();
+			return (Document) super.clone();  // Shallow copy
 		} catch (CloneNotSupportedException  e) {
 			throw new RuntimeException("Cloning Not Supported!");
 		}
